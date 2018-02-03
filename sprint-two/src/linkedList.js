@@ -7,7 +7,7 @@ var LinkedList = function() {
   list.addToTail = function(value) {
     var node = Node(value);
 
-    if(this.tail) {
+    if (this.tail) {
       this.tail.next = node;
     } else {
       this.head = node;
@@ -24,8 +24,8 @@ var LinkedList = function() {
 
   // Time complexity: O(n)
   list.contains = function(target) {
-    for(var currentNode = this.head; currentNode; currentNode = currentNode.next) {
-      if(currentNode.value === target) {
+    for (var currentNode = this.head; currentNode; currentNode = currentNode.next) {
+      if (currentNode.value === target) {
         return true;
       }
     }
