@@ -16,6 +16,18 @@ var LinkedList = function() {
   };
 
   // Time complexity: O(1)
+  list.addToHead = function(value) {
+    var node = Node(value);
+
+    if (this.head) {
+      node.next = this.head;
+    } else {
+      this.tail = node;
+    }
+    this.head = node;
+  };
+
+  // Time complexity: O(1)
   list.removeHead = function() {
     var node = this.head.value;
     this.head = this.head.next;
