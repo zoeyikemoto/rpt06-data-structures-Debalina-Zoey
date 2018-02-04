@@ -15,6 +15,7 @@ treeMethods.addChild = function(value) {
   var child = Tree(value);
   this.children.push(child);
 };
+
 //Time complexity: O(n);
 treeMethods.contains = function(target, root) {
   root = root || this;
@@ -29,7 +30,13 @@ treeMethods.contains = function(target, root) {
   return false;
 };
 
-
+//Time complexity: O(n);
+treeMethods.traverse = function(cb) {
+  cb(this.value);
+  for (var i = 0; i < this.children.length; i++) {
+    this.children[i].traverse(cb);
+  }
+};
 
 /*
  * Complexity: What is the time complexity of the above functions?
