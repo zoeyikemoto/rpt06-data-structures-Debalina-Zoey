@@ -24,4 +24,26 @@ describe('set', function() {
     expect(set.contains('Mel Gibson')).to.equal(false);
   });
 
+  it('should not contain duplicates', function() {
+    set.add('Mel Gibson');
+    set.add('Mel Gibson');
+    expect(set._length).to.equal(1);
+    set.add('Danny Glover');
+    expect(set._length).to.equal(2);
+  });
+
+  it('should handle input objects of any type', function() {
+    set.add(10);
+    set.add("ten");
+    set.add([10]);
+    set.add({ten: 10});
+    set.add(function(){});
+
+    expect(set.contains(10)).to.equal(true);
+    expect(set.contains("ten")).to.equal(true);
+    expect(set.contains([10])).to.equal(true);
+    expect(set.contains({ten: 10})).to.equal(true);
+    expect(set.contains(function(){})).to.equal(true);
+  });
+
 });

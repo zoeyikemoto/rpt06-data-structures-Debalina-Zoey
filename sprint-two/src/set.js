@@ -1,33 +1,30 @@
 var Set = function() {
   var set = Object.create(setPrototype);
-  set._storage = [];
+  set._storage = {};
+  set._length = 0;
   return set;
 };
 
 var setPrototype = {};
 
-// time complexity: O(n)
+// time complexity: O(11)
 setPrototype.add = function(item) {
   if (!this.contains(item)) {
-    this._storage.push(item);
+    this._storage[item] = item;
+    this._length++;
   }
 };
 
-// time complexity: O(n)
+// time complexity: O(1)
 setPrototype.contains = function(item) {
-  for (i = 0; i < this._storage.length; i++) {
-    if (this._storage[i] === item) {
-      return true;
-    }
-  }
-  return false;
+  return this._storage.hasOwnProperty(item);
 };
 
-// time complexity: O(n)
+// time complexity: O(1)
 setPrototype.remove = function(item) {
   if (this.contains(item)) {
-    var removed = this._storage.splice(this._storage.indexOf(item), 1);
-    return removed;
+    delete this._storage[item];
+    this._length--;
   }
 };
 

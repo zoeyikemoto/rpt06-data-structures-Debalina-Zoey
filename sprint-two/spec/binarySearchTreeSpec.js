@@ -37,4 +37,44 @@ describe('binarySearchTree', function() {
     binarySearchTree.depthFirstLog(func);
     expect(array).to.eql([5, 2, 3, 7]);
   });
+
+  it('should have a method to return the minimum value', function() {
+    binarySearchTree.insert(2);
+    binarySearchTree.insert(3);
+    binarySearchTree.insert(7);
+    expect(binarySearchTree.getMinValue()).to.equal(2);
+    binarySearchTree.insert(1);
+    expect(binarySearchTree.getMinValue()).to.equal(1);
+  });
+
+  it('should have a method to return the closest value', function() {
+    binarySearchTree.insert(2);
+    binarySearchTree.insert(3);
+    binarySearchTree.insert(8);
+    expect(binarySearchTree.findClosest(7)).to.equal(8);
+    expect(binarySearchTree.findClosest(1)).to.equal(2);
+    expect(binarySearchTree.findClosest(30)).to.equal(8);
+  });
+
+  it('should produce same result when searching array', function() {
+    var array = [5, 2, 3, 8]
+    binarySearchTree.insert(2);
+    binarySearchTree.insert(3);
+    binarySearchTree.insert(8);
+    var getClosestArray = function(array, value) {
+      var difference;
+      var result;
+      array.forEach(function(item) {
+        if (!difference || difference > Math.abs(item - value)) {
+          difference = Math.abs(item - value);
+          result = item;
+        }
+      });
+      return result;
+    }
+    expect(getClosestArray(array, 7)).to.equal(8);
+    expect(getClosestArray(array, 1)).to.equal(2);
+    expect(getClosestArray(array, 30)).to.equal(8);
+  });
+
 });

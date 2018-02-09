@@ -57,6 +57,38 @@ BinarySearchTree.prototype.depthFirstLog = function(cb) {
   }
 };
 
+// time complexity: 0(n)
+BinarySearchTree.prototype.getMinValue = function() {
+  if(!this.left) {
+    return this.value;
+  } else {
+    return this.left.getMinValue();
+  }
+};
+
+BinarySearchTree.prototype.findClosest = function(value) {
+  var difference;
+  var result;
+  if (value === this.value) {
+    return this.value;
+  }
+  if (!difference || difference > Math.abs(this.value - value)) {
+    difference = Math.abs(this.value - value);
+    result = this.value;
+  }
+  if (value < this.value) {
+    if (this.left) {
+      return this.left.findClosest(value);
+    }
+  }
+  if (value > this.value) {
+    if (this.right) {
+      return this.right.findClosest(value);
+    }
+  }
+  return result;
+}
+
 /*
  * Complexity: What is the time complexity of the above functions?
  * see comment above each method
