@@ -23,7 +23,7 @@ HashTable.prototype.insert = function(k, v) {
     bucket.push([k, v]);
     this._currentLength++;
   }
-//  this.limitCheck();
+ this.limitCheck();
 };
 
 //time complexity: 0(n);
@@ -44,8 +44,8 @@ HashTable.prototype.remove = function(k) {
   for (var i = 0; i < bucket.length; i++) {
     if (bucket[i][0] === k) {
       bucket.splice(i, 1);
-      this._currentLength++;
-    //      this.limitCheck();
+      this._currentLength--;
+//      this.limitCheck();
     }
   }
 };
@@ -62,19 +62,34 @@ HashTable.prototype.limitCheck = function() {
   }
   if (this._currentLength <= (this._limit * 0.25)) {
     newLimit = this._limit / 2;
+    console.log(newLimit);
     resizeTable = true;
   }
 
   if(resizeTable) {
-    var newTable = new HashTable(newLimit);
 
-    this._storage.each(function(bucket){
-      if (!bucket) { return;}
-      for(var i = 0; i < bucket.length; i++) {
-        newTable.insert(bucket[i][0], bucket[i][1]);
+    this._storage.each(function(bucketz){
+    console.log(this);
+      if (bucketz) {
+        for(var i = 0; i < bucketz.length; i++) {
+    //      console.log(this);
+        }
+      }
+    });
+    // var newTable = new HashTable();
+    var oldStorage = this._storage;
+    console.log(oldStorage);
+    this._storage = LimitedArray(newLimit);
+    oldStorage.each(function(bucketz){
+      if (bucketz) {
+        for(var i = 0; i < bucketz.length; i++) {
+        //  console.log(this);
+          this.insert(bucketz[i][0], bucketz[i][1]);
+        }
       }
     });
   }
+};
 
 
 
@@ -101,7 +116,7 @@ HashTable.prototype.limitCheck = function() {
 //     // this._storage = LimitedArray(this._limit);
 //   }
 
-};
+// };
 
 /*
  * Complexity: What is the time complexity of the above functions?
